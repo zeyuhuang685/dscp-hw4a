@@ -1,0 +1,28 @@
+universe = vanilla
+
+log = logs/$(Cluster)_$(Process).log
+output = logs/$(Cluster)_$(Process).out
+error = logs/$(Cluster)_$(Process).err
+
+container_image = file:///staging/jgillett/R_tidyverse_FITSio.sif
+requirements = (HasCHTCStaging == true)
+
+executable = ./hw4.sh
+arguments = $(tgznum).tgz cB58_Lyman_break.fit
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+
+transfer_input_files = hw4.R,file:///staging/groups/STAT_DSCP/boss/tgz/$(tgznum).tgz,file:///staging/groups/STAT_DSCP/boss/cB58_Lyman_break.fit
+
+request_cpus = 1
+request_memory = 2GB
+request_disk = 3GB
+
+queue tgznum from (
+3586
+3587
+3588
+3589
+3590
+)
